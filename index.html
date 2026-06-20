@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>little moments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+        .card {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(230, 223, 214, 0.8);
+        }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #4a3a30;
+            margin-bottom: 0.2rem;
+        }
+        .tag {
+            color: #b3a08e;
+            font-size: 0.75rem;
+            margin-bottom: 2rem;
+            border-left: 2px solid #ddd0c2;
+            padding-left: 0.7rem;
+        }
+        .row {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+        .block {
+            flex: 1;
+            background: rgba(253, 250, 247, 0.95);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #ede4db;
+        }
+        .block h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #6b5546;
+            margin-bottom: 0.6rem;
+        }
+        button {
+            background: #e8dfd6;
+            border: none;
+            padding: 0.5rem;
+            width: 100%;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4a362b;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+        }
+        button:hover {
+            background: #dacfc4;
+        }
+        .message-box {
+            background: #f6f0ea;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            text-align: center;
+            font-size: 0.8rem;
+            margin: 0.7rem 0;
+            color: #5e4538;
+            min-height: 60px;
+        }
+        .hover-area {
+            background: #f6f0ea;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            margin: 0.7rem 0;
+            transition: 0.1s;
+        }
+        .hover-area span {
+            font-size: 1.2rem;
+        }
+        input {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 2rem;
+            border: 1px solid #e2d5ca;
+            background: white;
+            font-size: 0.75rem;
+            margin: 0.7rem 0;
+            font-family: inherit;
+        }
+        .feedback {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 0.4rem;
+            color: #a48e7c;
+        }
+        .key-area {
+            background: #f6f0ea;
+            border-radius: 1rem;
+            padding: 0.6rem;
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 0.7rem;
+            color: #5e4538;
+            min-height: 40px;
+        }
+        .scroll-area {
+            background: #ede4db;
+            border-radius: 1rem;
+            padding: 0.6rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6b5546;
+            margin-top: 0.7rem;
+            min-height: 40px;
+        }
+        select {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 2rem;
+            border: 1px solid #e2d5ca;
+            background: white;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        @media (max-width: 700px) {
+            .row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>✦ a little corner</h1>
+    <div class="tag"></div>
+    
+    <div class="row">
+        <!-- first: click  -->
+        <div class="block">
+            <h3>🌿 click here</h3>
+            <div class="message-box" id="surpriseBox">something nice is waiting...</div>
+            <button id="surpriseBtn">click me</button>
+        </div>
+
+        <!-- second: hover changes -->
+        <div class="block">
+            <h3>🍃 rest your cursor</h3>
+            <div class="hover-area" id="hoverZone">
+                <span>🌸</span>
+                <div id="hoverMessage" style="margin-top: 6px;">just hover here</div>
+            </div>
+            <div class="feedback" id="hoverFeedback"></div>
+        </div>
+
+        <!-- third: say hello with name -->
+        <div class="block">
+            <h3>☕ write your name</h3>
+            <input type="text" id="username" placeholder="your name">
+            <button id="helloBtn">greet me</button>
+            <div class="feedback" id="greetingMsg"></div>
+        </div>
+    </div>
+
+    <!-- second row: keydown and select events -->
+    <div class="row" style="margin-top: 1rem;">
+        <!-- fourth: keydown -->
+        <div class="block">
+            <h3>⌨️ press any key</h3>
+            <div class="key-area" id="keyBox">press a key on your keyboard</div>
+            <div class="feedback" id="keyFeedback"></div>
+        </div>
+
+        <!-- fifth: select / dropdown -->
+        <div class="block">
+            <h3>🎯 choose your mood</h3>
+            <select id="moodSelect">
+                <option value="">-- select something --</option>
+                <option value="peaceful">🌿 peaceful</option>
+                <option value="happy">🌸 happy</option>
+                <option value="calm">🍃 calm</option>
+                <option value="grateful">✨ grateful</option>
+                <option value="hopeful">⭐ hopeful</option>
+            </select>
+            <div class="scroll-area" id="scrollBox">pick a mood above</div>
+            <div class="feedback" id="scrollFeedback"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // first event: surprise message
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    const surpriseBox = document.getElementById('surpriseBox');
+    
+    surpriseBtn.addEventListener('click', function() {
+        surpriseBox.innerHTML = '🎉 hope you have a lovely day ✨';
+        console.log('surprise clicked');
+    });
+
+    // second event: hover effect
+    const hoverZone = document.getElementById('hoverZone');
+    const hoverMessage = document.getElementById('hoverMessage');
+    const hoverFeedback = document.getElementById('hoverFeedback');
+    
+    hoverZone.addEventListener('mouseover', function() {
+        hoverMessage.innerHTML = '✨ you found the quiet spot';
+        hoverFeedback.innerHTML = 'soft glow';
+        console.log('hover active');
+    });
+    
+    hoverZone.addEventListener('mouseout', function() {
+        hoverMessage.innerHTML = 'just hover here';
+        hoverFeedback.innerHTML = '';
+        console.log('hover ended');
+    });
+
+    // third event: say hello with name
+    const helloBtn = document.getElementById('helloBtn');
+    const username = document.getElementById('username');
+    const greetingMsg = document.getElementById('greetingMsg');
+    
+    helloBtn.addEventListener('click', function() {
+        let name = username.value.trim();
+        
+        if (name === "") {
+            greetingMsg.innerHTML = '👋 hello, friend!';
+            greetingMsg.style.color = '#a48e7c';
+            alert('hello there!');
+        } else {
+            greetingMsg.innerHTML = '🌸 hello, ' + name + '! nice to meet you 🌸';
+            greetingMsg.style.color = '#6b7c5e';
+            alert('hello ' + name + '!');
+        }
+        console.log('greeting sent');
+    });
+
+    // fourth event: keydown
+    const keyBox = document.getElementById('keyBox');
+    const keyFeedback = document.getElementById('keyFeedback');
+    
+    document.addEventListener('keydown', function(event) {
+        let keyPressed = event.key;
+        keyBox.innerHTML = '⌨️ you pressed: ' + keyPressed;
+        keyFeedback.innerHTML = '✨ key detected!';
+        console.log('key pressed: ' + keyPressed);
+        
+        setTimeout(function() {
+            if (keyBox.innerHTML === '⌨️ you pressed: ' + keyPressed) {
+                keyBox.innerHTML = 'press a key on your keyboard';
+                keyFeedback.innerHTML = '';
+            }
+        }, 1500);
+    });
+
+    // fifth event: select / dropdown
+    const moodSelect = document.getElementById('moodSelect');
+    const scrollBox = document.getElementById('scrollBox');
+    const scrollFeedback = document.getElementById('scrollFeedback');
+    
+    moodSelect.addEventListener('change', function() {
+        let selectedValue = moodSelect.value;
+        let selectedText = moodSelect.options[moodSelect.selectedIndex].text;
+        
+        if (selectedValue === "") {
+            scrollBox.innerHTML = 'pick a mood above';
+            scrollFeedback.innerHTML = '';
+        } else {
+            scrollBox.innerHTML = '🎯 you chose: ' + selectedText;
+            scrollFeedback.innerHTML = '✨ lovely choice!';
+            console.log('mood selected: ' + selectedValue);
+            
+            setTimeout(function() {
+                if (scrollBox.innerHTML === '🎯 you chose: ' + selectedText) {
+                    scrollBox.innerHTML = 'pick a mood above';
+                    scrollFeedback.innerHTML = '';
+                    moodSelect.value = "";
+                }
+            }, 2000);
+        }
+    });
+</script>
+</body>
+</html>
